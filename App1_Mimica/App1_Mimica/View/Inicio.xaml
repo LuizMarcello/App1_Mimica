@@ -5,10 +5,11 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Nome do Grupo 1" />
-            <Entry Placeholder="(Opcional)"/>
+            <Entry Placeholder="(Opcional)" Text="{Binding NomeGrupo1}"/>
+            <Label Text="{Binding NomeGrupo1}"/>
             <Label Text="Nome do Grupo 2" />
             <Entry Placeholder="(Opcional)"/>
-            <Label Text="Nível"/>
+         
             <Picker>
                 <Picker.Items>
                     <x:String>Aleatório</x:String>
