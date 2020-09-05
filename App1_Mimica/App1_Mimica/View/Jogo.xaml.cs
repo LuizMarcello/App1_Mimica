@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App1_Mimica.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace App1_Mimica.View
         public Jogo()
         {
             InitializeComponent();
+
+            this.BindingContext = new JogoViewModel();
         }
     }
 }

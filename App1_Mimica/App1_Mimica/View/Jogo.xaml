@@ -6,21 +6,21 @@
         <StackLayout>
             <StackLayout>
                 <Label Text="Grupo"/>
-                <Label Text="Palavra - Pontuação (1)"/>
-                <Label Text="********************" HorizontalOptions="CenterAndExpand"/>
-                <Button Text="Mostrar" TextColor="White" BackgroundColor="Black"/>
+                <Label Text="{Binding PalavraPontuacao}"/>
+                <Label Text="{Binding Palavra}" HorizontalOptions="CenterAndExpand"/>
+                <Button Text="Mostrar" Command="{Binding MostrarPalavra}" TextColor="White" BackgroundColor="Black"/>
             </StackLayout>
-            <StackLayout>
-                <Label Text="200" FontSize="100" HorizontalOptions="CenterAndExpand"/>
+            <StackLayout IsVisible="{Binding ContainerContagem}">
+                <Label Text="{Binding TextoContagem}" FontSize="100" HorizontalOptions="CenterAndExpand"/>
                 <Label Text="Seg" HorizontalOptions="CenterAndExpand"/>
 
                 <StackLayout Orientation="Horizontal">
-                    <Button Text="Acertou" TextColor="White" BackgroundColor="LightGreen"/>
-                    <Button Text="Errou" TextColor="White" BackgroundColor="OrangeRed"/>
+                    <Button Text="Acertou" Command="{Binding Acertou}" TextColor="White" BackgroundColor="LightGreen"/>
+                    <Button Text="Errou" Command="{Binding Errou}" TextColor="White" BackgroundColor="OrangeRed"/>
                 </StackLayout>
             </StackLayout>
-            <StackLayout>
-                <Button Text="Iniciar" TextColor="White" BackgroundColor="Black"/>
+            <StackLayout IsVisible="{Binding ContainerIniciar}">
+                <Button Text="Iniciar" Command="{Binding Iniciar}" TextColor="White" BackgroundColor="Black"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
