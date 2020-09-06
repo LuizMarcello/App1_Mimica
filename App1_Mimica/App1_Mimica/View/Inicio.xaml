@@ -21,7 +21,8 @@
             <Entry Text="{Binding Jogo.TempoPalavra}"/>
             <Label Text="Rodadas" />
             <Entry Text="{Binding Jogo.Rodadas}"/>
-            <Button Command="{Binding IniciarCommand}" Text="Iniciar" TextColor="White" BackgroundColor="Black"/>
+            <Button Command="{Binding IniciarCommand}" Text="Iniciar" TextColor="White" 
+                    BackgroundColor="Black"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -2,26 +2,37 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App1_Mimica.View.Jogo">
+    
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Orientation="Vertical">
             <StackLayout>
-                <Label Text="Grupo"/>
+                <Label Text="{Binding NomeGrupo}"/>
                 <Label Text="{Binding PalavraPontuacao}"/>
                 <Label Text="{Binding Palavra}" HorizontalOptions="CenterAndExpand"/>
-                <Button Text="Mostrar" Command="{Binding MostrarPalavra}" TextColor="White" BackgroundColor="Black"/>
+                <Button Text="Mostrar" IsVisible="{Binding IsVisibleBtnMostrar}" 
+                        Command="{Binding MostrarPalavra}" TextColor="White" 
+                        BackgroundColor="Black"/>
             </StackLayout>
-            <StackLayout IsVisible="{Binding ContainerContagem}">
-                <Label Text="{Binding TextoContagem}" FontSize="100" HorizontalOptions="CenterAndExpand"/>
+            
+            <StackLayout IsVisible="{Binding IsVisibleContainerContagem}">
+                <Label Text="{Binding TextoContagem}" FontSize="100"
+                       HorizontalOptions="CenterAndExpand"/>
                 <Label Text="Seg" HorizontalOptions="CenterAndExpand"/>
 
                 <StackLayout Orientation="Horizontal">
-                    <Button Text="Acertou" Command="{Binding Acertou}" TextColor="White" BackgroundColor="LightGreen"/>
-                    <Button Text="Errou" Command="{Binding Errou}" TextColor="White" BackgroundColor="OrangeRed"/>
+                    <Button Text="Acertou" Command="{Binding Acertou}" TextColor="White" 
+                            BackgroundColor="LightGreen"/>
+                    <Button Text="Errou" Command="{Binding Errou}" TextColor="White" 
+                            BackgroundColor="OrangeRed"/>
                 </StackLayout>
-            </StackLayout>
-            <StackLayout IsVisible="{Binding ContainerIniciar}">
-                <Button Text="Iniciar" Command="{Binding Iniciar}" TextColor="White" BackgroundColor="Black"/>
+            </StackLayout >
+            
+            <StackLayout IsVisible="{Binding IsVisibleContainerIniciar}">
+                <Button Text="Iniciar" Command="{Binding Iniciar}" TextColor="White" 
+                         BackgroundColor="Black"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
+        
+            

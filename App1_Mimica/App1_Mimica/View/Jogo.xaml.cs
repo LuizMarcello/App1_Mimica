@@ -1,4 +1,5 @@
-﻿using App1_Mimica.ViewModel;
+﻿using App1_Mimica.Model;
+using App1_Mimica.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,11 @@ namespace App1_Mimica.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Jogo : ContentPage
     {
-        public Jogo()
+        public Jogo(Grupo grupo)
         {
             InitializeComponent();
 
-            this.BindingContext = new JogoViewModel();
+            this.BindingContext = new JogoViewModel(grupo);
         }
     }
 }

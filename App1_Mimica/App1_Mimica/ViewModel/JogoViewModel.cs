@@ -1,37 +1,196 @@
-﻿using System;
+﻿using App1_Mimica.Model;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using Xamarin.Forms;
 
 namespace App1_Mimica.ViewModel
 {
-    public class JogoViewModel
+    public class JogoViewModel : INotifyPropertyChanged
     {
+        public Grupo Grupo { get; set; }
+
+        public string NomeGrupo { get; set; }
+
+        //Usando o snnipet "propfull" para criar estas propriedades:
+
+        private byte _PalavraPontuacao;
+
+        public byte PalavraPontuacao
+        {
+            get { return _PalavraPontuacao; }
+            set { _PalavraPontuacao = value;
+                OnPropertyChanged("PalavraPontuacao");
+            }
+        }
+
+        private string _Palavra;
+
+        public string Palavra
+        {
+            get { return _Palavra; }
+            set { _Palavra = value;
+                OnPropertyChanged("Palavra");
+            }
+        }
+
+        private string _TextoContagem;
+
+        public string TextoContagem
+        {
+            get { return _TextoContagem; }
+            set { _TextoContagem = value;
+                OnPropertyChanged("TextoContagem");
+            }
+        }
+
+        private bool _IsVisibleContainerContagem;
+
+        public bool IsVisibleContainerContagem
+        {
+            get { return _IsVisibleContainerContagem; }
+            set { _IsVisibleContainerContagem = value;
+                OnPropertyChanged("IsVisibleContainerContagem");
+            }
+        }
+
+        private bool _IsVisibleContainerIniciar;
+
+        public bool IsVisibleContainerIniciar
+        {
+            get { return _IsVisibleContainerIniciar; }
+            set { _IsVisibleContainerIniciar = value;
+                OnPropertyChanged("IsVisibleContainerIniciar");
+            }
+        }
+
+        private bool _IsVisibleBtnMostrar;
+
+        public bool IsVisibleBtnMostrar
+        {
+            get { return _IsVisibleBtnMostrar; }
+            set { _IsVisibleBtnMostrar = value;
+                OnPropertyChanged("IsVisibleBtnMostrar");
+            }
+        }
+
         public Command MostrarPalavra { get; set; }
         public Command Acertou { get; set; }
         public Command Errou { get; set; }
         public Command Iniciar { get; set; }
 
-        public byte PalavraPontuacao { get; set; }
-        public string Palavra { get; set; }
-        public string TextoContagem { get; set; }
-
-        public bool ContainerContagem { get; set; }
-        public bool ContainerIniciar { get; set; }
-
-        public JogoViewModel()
+        public JogoViewModel(Grupo grupo)
         {
-            ContainerContagem = false;
+            Grupo = grupo;
+            NomeGrupo = grupo.Nome;
 
-            ContainerIniciar = true;
+            IsVisibleContainerContagem = false;
+            IsVisibleContainerIniciar = false;
+            IsVisibleBtnMostrar = true;
 
-            //MostrarPalavra = new Command(NomeDoMetodoASerConstruido);
-            //Acertou = new Command(NomeDoMetodoASerConstruido);
-            //Errou = new Command(NomeDoMetodoASerConstruido);
-            //Iniciar = new Command(NomeDoMetodoASerConstruido);
+            Palavra = "***************";
+
+            MostrarPalavra = new Command(MostrarPalavraAction);
+            Acertou = new Command(AcertouAction);
+            Errou = new Command(ErrouAction);
+            Iniciar = new Command(IniciarAction);
+        }
+
+        private void MostrarPalavraAction()
+        {
+            PalavraPontuacao = 3;
+            Palavra = "Sentar";
+            IsVisibleBtnMostrar = false;
+            IsVisibleContainerIniciar = true;
+        }
+
+        private void IniciarAction()
+        {
+            IsVisibleContainerIniciar = false;
+            IsVisibleContainerContagem = true;
+
+            int i = Armazenamento.Armazenamento.Jogo.TempoPalavra;
+            Device.StartTimer(TimeSpan.FromSeconds(1), () => {
+                TextoContagem = i.ToString();
+                i--;
+                if (i < 0)
+                {
+                    TextoContagem = "Esgotou o tempo.";
+                }
+                return true;
+            });
+        }
+
+        private void ErrouAction()
+        {
+            GoProximoGrupo();
+        }
+
+        private void AcertouAction()
+        {
+            Grupo.Pontuacao += PalavraPontuacao;
+
+            GoProximoGrupo();
+        }
+
+        private void GoProximoGrupo()
+        {
+            Grupo grrupo;
+
+            if (Armazenamento.Armazenamento.Jogo.Grupo1 == Grupo)
+            {
+                grrupo = Armazenamento.Armazenamento.Jogo.Grupo2;
+            }
+            else
+            {
+                grrupo = Armazenamento.Armazenamento.Jogo.Grupo1;
+                Armazenamento.Armazenamento.RodadaAtual++;
+            }
+
+            if (Armazenamento.Armazenamento.RodadaAtual > Armazenamento.Armazenamento.Jogo.Rodadas)
+            {
+                App.Current.MainPage = new View.Resultado();
+            }
+            else
+            {
+                App.Current.MainPage = new View.Jogo(grrupo);
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string NameProperty)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(NameProperty));
+            }
         }
     }
 }
+
+            
+            
+
+           
+
+            
+           
+
+        
+
+
+        
+        
+
+
+        
+
+            
+            
+
+
 
 
 
