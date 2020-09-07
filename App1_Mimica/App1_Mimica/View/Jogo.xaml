@@ -14,7 +14,7 @@
         <StackLayout Orientation="Vertical">
             <StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Nome do grupo: "/>
+                    <Label Text="{Binding NumeroGrupo}"/>
                     <Label Text="{Binding NomeGrupo}"/>
                 </StackLayout>
                 

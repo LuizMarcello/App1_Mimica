@@ -10,8 +10,8 @@ namespace App1_Mimica.ViewModel
     public class JogoViewModel : INotifyPropertyChanged
     {
         public Grupo Grupo { get; set; }
-
         public string NomeGrupo { get; set; }
+        public string NumeroGrupo { get; set; }
 
         //Usando o snnipet "propfull" para criar estas propriedades:
 
@@ -96,6 +96,14 @@ namespace App1_Mimica.ViewModel
         {
             Grupo = grupo;
             NomeGrupo = grupo.Nome;
+            if (grupo == Armazenamento.Armazenamento.Jogo.Grupo1)
+            {
+                NumeroGrupo = "Grupo 1 ";
+            }
+            else
+            {
+                NumeroGrupo = "Grupo 2 ";
+            }
 
             IsVisibleContainerContagem = false;
             IsVisibleContainerIniciar = false;
@@ -225,6 +233,8 @@ namespace App1_Mimica.ViewModel
         }
     }
 }
+
+
 
             
        

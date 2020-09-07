@@ -12,6 +12,16 @@ namespace App1_Mimica.ViewModel
     {
         public Jogo Jogo { get; set; }
         public Command IniciarCommand { get; set; }
+        
+        //Usando snippet "propfull":
+        private string _MsgErro;
+        public string MsgErro
+        {
+            get { return _MsgErro; }
+            set { _MsgErro = value;
+                OnPropertyChanged("MsgErro");
+            }
+        }
 
         public InicioViewModel()
         {
@@ -19,13 +29,33 @@ namespace App1_Mimica.ViewModel
             Jogo = new Jogo();
             Jogo.Grupo1 = new Grupo();
             Jogo.Grupo2 = new Grupo();
+
+            Jogo.TempoPalavra = 120;
+            Jogo.Rodadas = 7;
         }
 
         private void IniciarJogo()
         {
-            Armazenamento.Armazenamento.Jogo = this.Jogo;
-            Armazenamento.Armazenamento.RodadaAtual = 1;
-            App.Current.MainPage = new View.Jogo(Jogo.Grupo1);
+            string error = "";
+            if (Jogo.TempoPalavra < 10)
+            {
+                error += "Valor minimo para o tempo da palavra é 10 segundos.";
+            }
+            if (Jogo.Rodadas == 0)
+            {
+                error += "\nO valor mínimo para a rodada é 1.";
+            }
+            if (error.Length > 0)
+            {
+                MsgErro = error;
+            }
+            else
+            {
+                Armazenamento.Armazenamento.Jogo = this.Jogo;
+                Armazenamento.Armazenamento.RodadaAtual = 1;
+
+                App.Current.MainPage = new View.Jogo(Jogo.Grupo1);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -39,6 +69,10 @@ namespace App1_Mimica.ViewModel
         }
     }
 }
+
+       
+
+            
             
 
         
