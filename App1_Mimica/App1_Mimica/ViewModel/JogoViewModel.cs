@@ -20,7 +20,9 @@ namespace App1_Mimica.ViewModel
         public byte PalavraPontuacao
         {
             get { return _PalavraPontuacao; }
-            set { _PalavraPontuacao = value;
+            set
+            {
+                _PalavraPontuacao = value;
                 OnPropertyChanged("PalavraPontuacao");
             }
         }
@@ -30,7 +32,9 @@ namespace App1_Mimica.ViewModel
         public string Palavra
         {
             get { return _Palavra; }
-            set { _Palavra = value;
+            set
+            {
+                _Palavra = value;
                 OnPropertyChanged("Palavra");
             }
         }
@@ -40,7 +44,9 @@ namespace App1_Mimica.ViewModel
         public string TextoContagem
         {
             get { return _TextoContagem; }
-            set { _TextoContagem = value;
+            set
+            {
+                _TextoContagem = value;
                 OnPropertyChanged("TextoContagem");
             }
         }
@@ -50,7 +56,9 @@ namespace App1_Mimica.ViewModel
         public bool IsVisibleContainerContagem
         {
             get { return _IsVisibleContainerContagem; }
-            set { _IsVisibleContainerContagem = value;
+            set
+            {
+                _IsVisibleContainerContagem = value;
                 OnPropertyChanged("IsVisibleContainerContagem");
             }
         }
@@ -60,7 +68,9 @@ namespace App1_Mimica.ViewModel
         public bool IsVisibleContainerIniciar
         {
             get { return _IsVisibleContainerIniciar; }
-            set { _IsVisibleContainerIniciar = value;
+            set
+            {
+                _IsVisibleContainerIniciar = value;
                 OnPropertyChanged("IsVisibleContainerIniciar");
             }
         }
@@ -70,7 +80,9 @@ namespace App1_Mimica.ViewModel
         public bool IsVisibleBtnMostrar
         {
             get { return _IsVisibleBtnMostrar; }
-            set { _IsVisibleBtnMostrar = value;
+            set
+            {
+                _IsVisibleBtnMostrar = value;
                 OnPropertyChanged("IsVisibleBtnMostrar");
             }
         }
@@ -79,7 +91,7 @@ namespace App1_Mimica.ViewModel
         public Command Acertou { get; set; }
         public Command Errou { get; set; }
         public Command Iniciar { get; set; }
-
+        
         public JogoViewModel(Grupo grupo)
         {
             Grupo = grupo;
@@ -99,8 +111,51 @@ namespace App1_Mimica.ViewModel
 
         private void MostrarPalavraAction()
         {
-            PalavraPontuacao = 3;
-            Palavra = "Sentar";
+
+            //PalavraPontuacao = 3;
+            //Palavra = "Sentar";
+
+            var NumNivel = Armazenamento.Armazenamento.Jogo.NivelNumerico;
+            //var NumNivel = Jogo.NivelNumerico;
+
+            //Aleatorio
+            if (NumNivel == 0)
+            {
+                Random rd = new Random();
+                int niv = rd.Next(0, 2);
+                int indice = rd.Next(0, Armazenamento.Armazenamento.Palavras[niv].Length);
+                Palavra = Armazenamento.Armazenamento.Palavras[niv][indice];
+                //Alinhamento de operadores ternários 
+                PalavraPontuacao  = (byte) ((niv==0) ? 1 : (niv==1) ? 3 : 5);
+            }
+
+            //Fácil
+            if (NumNivel == 1)
+            {
+                Random rd = new Random();
+                int indice = rd.Next(0, Armazenamento.Armazenamento.Palavras[NumNivel - 1].Length);
+                Palavra = Armazenamento.Armazenamento.Palavras[NumNivel - 1][indice];
+                PalavraPontuacao = 1;
+            }
+
+            //Médio
+            if (NumNivel == 2)
+            {
+                Random rd = new Random();
+                int indice = rd.Next(0, Armazenamento.Armazenamento.Palavras[NumNivel - 1].Length);
+                Palavra = Armazenamento.Armazenamento.Palavras[NumNivel - 1][indice];
+                PalavraPontuacao = 3;
+            }
+
+            //Difícil
+            if (NumNivel == 3)
+            {
+                Random rd = new Random();
+                int indice = rd.Next(0, Armazenamento.Armazenamento.Palavras[NumNivel - 1].Length);
+                Palavra = Armazenamento.Armazenamento.Palavras[NumNivel - 1][indice];
+                PalavraPontuacao = 5;
+            }
+
             IsVisibleBtnMostrar = false;
             IsVisibleContainerIniciar = true;
         }
@@ -111,7 +166,8 @@ namespace App1_Mimica.ViewModel
             IsVisibleContainerContagem = true;
 
             int i = Armazenamento.Armazenamento.Jogo.TempoPalavra;
-            Device.StartTimer(TimeSpan.FromSeconds(1), () => {
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
                 TextoContagem = i.ToString();
                 i--;
                 if (i < 0)
@@ -171,24 +227,28 @@ namespace App1_Mimica.ViewModel
 }
 
             
-            
-
-           
-
-            
-           
-
-        
+       
 
 
-        
-        
 
 
-        
 
-            
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

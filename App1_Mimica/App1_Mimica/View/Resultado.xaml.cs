@@ -15,6 +15,8 @@ namespace App1_Mimica.View
         public Resultado()
         {
             InitializeComponent();
+
+            this.BindingContext = new ViewModel.ResultadoViewModel();
         }
     }
 }
