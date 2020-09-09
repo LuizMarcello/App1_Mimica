@@ -28,6 +28,7 @@
             <Style TargetType="Button">
                 <Setter Property="BackgroundColor" Value="#F78053"/>
                 <Setter Property="TextColor" Value="#FFFFFF"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
             </Style>
 
             <!--ContainerEspecial-->
