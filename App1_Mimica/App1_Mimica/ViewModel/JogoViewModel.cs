@@ -63,15 +63,15 @@ namespace App1_Mimica.ViewModel
             }
         }
 
-        private bool _IsVisibleContainerIniciar;
+        private bool _IsVisibleBtnIniciar;
 
-        public bool IsVisibleContainerIniciar
+        public bool IsVisibleBtnIniciar
         {
-            get { return _IsVisibleContainerIniciar; }
+            get { return _IsVisibleBtnIniciar; }
             set
             {
-                _IsVisibleContainerIniciar = value;
-                OnPropertyChanged("IsVisibleContainerIniciar");
+                _IsVisibleBtnIniciar = value;
+                OnPropertyChanged("IsVisibleBtnIniciar");
             }
         }
 
@@ -106,7 +106,7 @@ namespace App1_Mimica.ViewModel
             }
 
             IsVisibleContainerContagem = false;
-            IsVisibleContainerIniciar = false;
+            IsVisibleBtnIniciar = false;
             IsVisibleBtnMostrar = true;
 
             Palavra = "***************";
@@ -165,12 +165,12 @@ namespace App1_Mimica.ViewModel
             }
 
             IsVisibleBtnMostrar = false;
-            IsVisibleContainerIniciar = true;
+            IsVisibleBtnIniciar = true;
         }
 
         private void IniciarAction()
         {
-            IsVisibleContainerIniciar = false;
+            IsVisibleBtnIniciar = false;
             IsVisibleContainerContagem = true;
 
             int i = Armazenamento.Armazenamento.Jogo.TempoPalavra;
